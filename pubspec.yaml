@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -30,12 +30,12 @@ dependencies:
   fluro: ^1.4.0 # 路由管理插件
   flutter_screenutil: ^0.5.1 # 屏幕适配插件
   flutter_swiper: ^1.1.5 # 轮播插件
-  fish_redux: ^0.1.8
+  redux_epics: ^0.10.6
+  rxdart: ^0.22.0
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
