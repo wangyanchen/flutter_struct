@@ -77,7 +77,7 @@ class _HomeHeadState extends State<HomeHead> with SingleTickerProviderStateMixin
             tabs: tabs,
             controller: _tabController,
             indicatorWeight: 1,
-            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.black,
             labelPadding: EdgeInsets.only(left: ScreenUtil().setSp(20), right: ScreenUtil().setSp(20)),
             labelStyle: TextStyle(
