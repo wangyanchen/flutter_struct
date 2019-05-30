@@ -38,7 +38,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
     return Container(
       child: Scaffold(
         appBar: PreferredSize(
-          child: HomeHead( tabs: tabs),
+          child: HomeHead( tabs: tabs, tabController: _tabController),
           preferredSize: Size(0, 90),
         ),
         body: TabBarView(

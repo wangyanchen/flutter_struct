@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_struct/style/SyIcons.dart';
 class HomeHead extends StatefulWidget {
   List<Widget> tabs;
-  HomeHead({ this.tabs,});
+  TabController tabController;
+  HomeHead({ this.tabs, this.tabController});
   @override
   _HomeHeadState createState() => _HomeHeadState();
 }
@@ -15,7 +16,7 @@ class _HomeHeadState extends State<HomeHead> with SingleTickerProviderStateMixin
   void initState() {
     this.tabs = widget.tabs;
     super.initState();
-    _tabController = new TabController(initialIndex: 0, length: tabs.length, vsync: this);
+    _tabController = widget.tabController;
   }
   @override
   Widget build(BuildContext context) {
