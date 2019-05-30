@@ -10,8 +10,11 @@ Request req = new Request();
 class Request {
   Dio dioHttp;
   /* static Request req = new Request(); */
+  // 静态变量 实例化自己的构造函数
   static final Request _instance = new Request._internal();
+  // 工厂函数：如果一个构造函数并不总是返回一个新的对象，则使用 factory 来定义 这个构造函数
   factory Request() => _instance;
+  // 命名构造函数
   Request._internal() {
     if (null == dioHttp) {
       dioHttp = new Dio(new BaseOptions(

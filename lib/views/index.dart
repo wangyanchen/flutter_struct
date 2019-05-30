@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:flutter_struct/components/home_head.dart';
-import 'package:flutter_struct/model/globalModel.dart';
-import 'package:flutter_struct/redux/global.dart';
+
+import 'package:flutter_struct/models/models.dart';
+import 'package:flutter_struct/redux/actions/actions.dart';
+
 import 'package:flutter_struct/views/my.dart';
 import 'package:flutter_struct/views/search.dart';
 
@@ -50,11 +52,11 @@ class _IndexState extends State<Index> {
     //     '高度相对于设计稿放大的比例:${ScreenUtil.getInstance().scaleHeight * ScreenUtil.pixelRatio}');
     // print('系统的字体缩放比例:${ScreenUtil.textScaleFactory}');
 
-    return new StoreConnector<GlobalState, GlobalModel>(
+    return new StoreConnector<AppState, GlobalModel>(
       converter: (store) {
         return new GlobalModel(
           state: store.state,
-          setIndex: (index) => store.dispatch(GlobalIndexAction(index)),
+          setIndex: (index) => store.dispatch(SelectTabAction(index)),
         );
       },
       builder: (BuildContext context, GlobalModel vm) {
@@ -63,7 +65,7 @@ class _IndexState extends State<Index> {
               child: HomeHead(),
               preferredSize: Size(0, 60),
             ),
-            body: page_view_list2[vm.state.tabIndex],
+            body: page_view_list2[vm.state.activeTab],
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
@@ -75,10 +77,16 @@ class _IndexState extends State<Index> {
                 BottomNavigationBarItem(
                     icon: Icon(Icons.people), title: Text('my'))
               ],
-              currentIndex: vm.state.tabIndex,
+              currentIndex: vm.state.activeTab,
               onTap: vm.setIndex,
             ));
       },
     );
   }
+}
+
+class GlobalModel {
+  final AppState state;
+  final void Function(int index ) setIndex;
+  GlobalModel({ this.state, this.setIndex});
 }

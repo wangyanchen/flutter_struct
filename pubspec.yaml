@@ -32,6 +32,7 @@ dependencies:
   flutter_swiper: ^1.1.5 # 轮播插件
   redux_epics: ^0.10.6
   rxdart: ^0.22.0
+  shared_preferences: ^0.5.2+1
   
 dev_dependencies:
   flutter_test:
