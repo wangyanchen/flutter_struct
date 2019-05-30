@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_struct/style/SyIcons.dart';
 class HomeHead extends StatefulWidget {
+  List<Widget> tabs;
+  HomeHead({ this.tabs,});
   @override
   _HomeHeadState createState() => _HomeHeadState();
 }
 
-class _HomeHeadState extends State<HomeHead> {
+class _HomeHeadState extends State<HomeHead> with SingleTickerProviderStateMixin{
+  TabController _tabController;
+  List<Widget> tabs;
+  @override
+  void initState() {
+    this.tabs = widget.tabs;
+    super.initState();
+    _tabController = new TabController(initialIndex: 0, length: tabs.length, vsync: this);
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
@@ -60,6 +70,18 @@ class _HomeHeadState extends State<HomeHead> {
                 height: ScreenUtil().setHeight(64),
               ),
             ],
+          ),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: tabs,
+            controller: _tabController,
+            indicatorWeight: 1,
+            indicatorSize: TabBarIndicatorSize.tab,
+            labelColor: Colors.black,
+            labelPadding: EdgeInsets.only(left: ScreenUtil().setSp(20), right: ScreenUtil().setSp(20)),
+            labelStyle: TextStyle(
+              fontSize: ScreenUtil().setSp(28),
+            ),
           ),
           elevation: 0,
        )

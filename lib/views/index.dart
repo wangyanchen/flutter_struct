@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-import 'package:flutter_struct/components/home_head.dart';
-
 import 'package:flutter_struct/models/models.dart';
 import 'package:flutter_struct/redux/actions/actions.dart';
 
@@ -60,11 +58,7 @@ class _IndexState extends State<Index> {
         );
       },
       builder: (BuildContext context, GlobalModel vm) {
-        return Scaffold(
-            appBar: PreferredSize(
-              child: HomeHead(),
-              preferredSize: Size(0, 60),
-            ),
+        return Scaffold(           
             body: page_view_list2[vm.state.activeTab],
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
