@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-
-import 'package:flutter_struct/models/models.dart';
-import 'package:flutter_struct/redux/actions/actions.dart';
 
 import 'package:flutter_struct/views/my.dart';
 import 'package:flutter_struct/views/search.dart';
@@ -16,6 +12,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  int tabIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -23,9 +20,14 @@ class _IndexState extends State<Index> {
 
   List<Widget> page_view_list2 = [HomeView(), SearchView(), MyView()];
   @override
-
   void dispose() {
     super.dispose();
+  }
+
+  void selectTab(int index) {
+    setState(() {
+      tabIndex = index;
+    });
   }
 
   @override
@@ -50,37 +52,17 @@ class _IndexState extends State<Index> {
     //     '高度相对于设计稿放大的比例:${ScreenUtil.getInstance().scaleHeight * ScreenUtil.pixelRatio}');
     // print('系统的字体缩放比例:${ScreenUtil.textScaleFactory}');
 
-    return new StoreConnector<AppState, GlobalModel>(
-      converter: (store) {
-        return new GlobalModel(
-          state: store.state,
-          setIndex: (index) => store.dispatch(SelectTabAction(index)),
-        );
-      },
-      builder: (BuildContext context, GlobalModel vm) {
-        return Scaffold(           
-            body: page_view_list2[vm.state.activeTab],
-            bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text('home'),
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.search), title: Text('search')),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.people), title: Text('my'))
-              ],
-              currentIndex: vm.state.activeTab,
-              onTap: vm.setIndex,
-            ));
-      },
-    );
+    return Scaffold(
+        body: page_view_list2[tabIndex],
+        bottomNavigationBar:
+            BottomNavigationBar(items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('home'),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), title: Text('search')),
+          BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('my'))
+        ], currentIndex: tabIndex, onTap: selectTab));
   }
-}
-
-class GlobalModel {
-  final AppState state;
-  final void Function(int index ) setIndex;
-  GlobalModel({ this.state, this.setIndex});
 }

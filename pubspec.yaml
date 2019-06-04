@@ -33,6 +33,7 @@ dependencies:
   redux_epics: ^0.10.6
   rxdart: ^0.22.0
   shared_preferences: ^0.5.2+1
+  mvc_pattern: ^3.3.6
   
 dev_dependencies:
   flutter_test:
