@@ -81,7 +81,7 @@ class Request {
 
     params['timestamp'] = new DateTime.now().millisecondsSinceEpoch ~/ 1000;
     params['sign'] = this.signData(path, params, secrecOrToken);
-    print('request data is:\n $params');
+    // print('request data is:\n $params');
     return params;
   }
 
@@ -95,14 +95,14 @@ class Request {
     List<String> sortParams = [];
     keys.forEach((k) {
       sortParams.add(k + '=' + params[k].toString());
-      print('$sortParams');
+      // print('$sortParams');
     });
     // 拼接签名字符串为（path + sortParams + secretOrToken）并转换sortParams为 '&key=value'
     signStr = path + sortParams.join('&') + secrecOrToken;
 
     // md5加密
     signStr = md5Str(signStr);
-    print('sign data is:\n $signStr');
+    // print('sign data is:\n $signStr');
     return signStr;
   }
 }

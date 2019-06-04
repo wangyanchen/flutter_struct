@@ -1,9 +1,22 @@
-class Category {
-  final String categoryName;
-  final String categoryId;
+class CategoryModel {
+  final String name;
+  final String id;
   final String parentId;
-  Category(this.categoryId, this.categoryName, this.parentId);
-  factory Category.fromJson(Map<String, Object> json) {
-    return new Category(json['categoryid'], json['category_name'], json['parentid']);
+  final String icon;
+  final String image;
+  int status;
+
+  CategoryModel(this.name, this.id, this.parentId, this.icon, this.image, this.status);
+  factory CategoryModel.fromJson(Map<String, Object> json) {
+    return new CategoryModel(
+        json['id'], json['name'], json['parentid'], json['icon'], json['image'], json['status']);
   }
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'name': name,
+        'parentId': parentId,
+        'icon': icon,
+        'image': image,
+        'status': status
+      };
 }

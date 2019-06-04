@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
 import 'package:flutter_struct/routers/application.dart';
 import 'package:flutter_struct/routers/routers.dart';
@@ -11,7 +11,7 @@ void main() {
   runApp(new MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends AppMVC {
   MyApp() {
     final router = new Router();
     Routes.configureRoutes(router);

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_struct/components/home_head.dart';
+import 'package:flutter_struct/controllers/home_controller.dart';
+import 'package:flutter_struct/models/category.dart';
+
 class HomeView extends StatefulWidget {
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -8,6 +11,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   TabController _tabController;
+
   List<Widget> tabs = [
     Tab(child: Text('首页', textAlign: TextAlign.left),),
     Tab(text: '分类1',),
@@ -31,6 +35,13 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     _tabController = new TabController(initialIndex: 0, length: tabs.length, vsync: this);
+    homeCon.init();
+    List<CategoryModel> list = HomeCon.categoryList();
+    // print(list); 
+    print(list.length);
+    for (var item in list) {
+      print(item);
+    } 
   }
   @override
   Widget build(BuildContext context) {
