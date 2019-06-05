@@ -7,6 +7,7 @@ final HomeCon homeCon = new HomeCon();
 
 class HomeCon extends ControllerMVC {
   final categoryListModel = new CategoryListModel();
+  List<CategoryModel> categoryList = [];
   factory HomeCon() {
     if (_this == null) _this = HomeCon._();
     return _this;
@@ -20,11 +21,12 @@ class HomeCon extends ControllerMVC {
   }
   Future loadData() async {
     print('load Data');
-    categoryListModel.getList();
+    categoryListModel.getList().then((res) {
+      setState(() {
+        categoryList = res;
+      });
+    });
     refresh();
     return;
   }
-  static List<CategoryModel> categoryList() {
-    return CategoryListModel.categorys;
-  } 
 }
