@@ -3,83 +3,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_struct/components/home_head.dart';
 import 'package:flutter_struct/controllers/home_controller.dart';
 import 'package:flutter_struct/models/category.dart';
-import 'package:flutter_struct/models/category_list.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
 class HomeView extends StatefulWidget {
+  HomeView({Key key}) : super(key: key);
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView>
-    with SingleTickerProviderStateMixin {
+class _HomeViewState extends StateMVC<HomeView>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  _HomeViewState() : super(HomeCon()) {
+    homeCon = HomeCon.con;
+  }
+ 
+  HomeCon homeCon;
   TabController _tabController;
-  List<CategoryModel> _categoryList = [];
-  List<Widget> tabs = [
-    Tab(
-      child: Text('首页', textAlign: TextAlign.left),
-    ),
-    Tab(
-      text: '分类1',
-    ),
-    Tab(
-      text: '分类2',
-    ),
-    Tab(
-      text: '分类3',
-    ),
-    Tab(
-      text: '分类4',
-    ),
-    Tab(
-      text: '分类5',
-    ),
-    Tab(
-      text: '分类6',
-    ),
-  ];
-
-  List<Widget> tabView = [
-    new Center(
-      child: Text('首页'),
-    ),
-    new Center(
-      child: Text('分类1'),
-    ),
-    new Center(
-      child: Text('分类2'),
-    ),
-    new Center(
-      child: Text('分类3'),
-    ),
-    new Center(
-      child: Text('分类4'),
-    ),
-    new Center(
-      child: Text('分类5'),
-    ),
-    new Center(
-      child: Text('分类6'),
-    )
-  ];
+  List<CategoryModel> _categoryList = []; // 分类列表
+  List<Widget> tabs = []; // tab标题
+  List<Widget> tabView = []; // tabView
   @override
   void initState() {
     super.initState();
-    _tabController =
-        new TabController(initialIndex: 0, length: tabs.length, vsync: this);
     homeCon.init();
     // List<CategoryModel> list = HomeCon.categoryList();
-    print(_categoryList);
-    _categoryList = homeCon.categoryList;
-    print(_categoryList.length);
-    for (var item in _categoryList) {
-      print(item);
-      print('---------------');
-    }
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
-    print('home');
+    print('ssss');
+    super.build(context);
+     _categoryList = homeCon.categoryList;
+    tabs = [];
+    tabView = [];
+    for (var item in _categoryList) {
+      // print(item.name);
+      tabs.add(Tab(text: item.name,));
+      tabView.add(
+        new Center(
+          child: Text(item.name),
+        )
+      );
+    }
+    _tabController =
+        new TabController(initialIndex: 0, length: tabs.length, vsync: this);
     return Container(
         child: Scaffold(
             appBar: PreferredSize(
@@ -91,4 +62,6 @@ class _HomeViewState extends State<HomeView>
               controller: _tabController,
             )));
   }
+  @override
+  bool get wantKeepAlive => true;
 }

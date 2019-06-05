@@ -9,7 +9,7 @@ class CategoryModel {
   CategoryModel(this.name, this.id, this.parentId, this.icon, this.image, this.status);
   factory CategoryModel.fromJson(Map<String, Object> json) {
     return new CategoryModel(
-        json['id'], json['name'], json['parentid'], json['icon'], json['image'], json['status']);
+        json['name'], json['id'], json['parentid'], json['icon'], json['image'], json['status']);
   }
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
