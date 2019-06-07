@@ -4,6 +4,7 @@ import 'package:flutter_struct/components/home_head.dart';
 import 'package:flutter_struct/controllers/home_controller.dart';
 import 'package:flutter_struct/models/category.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:flutter_struct/views/widget/home_category.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -12,7 +13,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends StateMVC<HomeView>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin {
   _HomeViewState() : super(HomeCon()) {
     homeCon = HomeCon.con;
   }
@@ -22,6 +23,7 @@ class _HomeViewState extends StateMVC<HomeView>
   List<CategoryModel> _categoryList = []; // 分类列表
   List<Widget> tabs = []; // tab标题
   List<Widget> tabView = []; // tabView
+
   @override
   void initState() {
     super.initState();
@@ -35,8 +37,6 @@ class _HomeViewState extends StateMVC<HomeView>
   
   @override
   Widget build(BuildContext context) {
-    print('ssss');
-    super.build(context);
      _categoryList = homeCon.categoryList;
     tabs = [];
     tabView = [];
@@ -44,9 +44,10 @@ class _HomeViewState extends StateMVC<HomeView>
       // print(item.name);
       tabs.add(Tab(text: item.name,));
       tabView.add(
-        new Center(
-          child: Text(item.name),
-        )
+        HomeCategory(item)
+        // new Center(
+        //   child: Text(item.name),
+        // )
       );
     }
     _tabController =
@@ -62,6 +63,4 @@ class _HomeViewState extends StateMVC<HomeView>
               controller: _tabController,
             )));
   }
-  @override
-  bool get wantKeepAlive => true;
 }

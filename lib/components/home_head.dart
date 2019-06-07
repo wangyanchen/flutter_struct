@@ -11,7 +11,7 @@ class HomeHead extends StatefulWidget {
 }
 
 class _HomeHeadState extends State<HomeHead>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with SingleTickerProviderStateMixin {
   
   TabController _tabController;
   List<Widget> tabs;
@@ -22,7 +22,6 @@ class _HomeHeadState extends State<HomeHead>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     this.tabs = widget.tabs;
     _tabController = widget.tabController;
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
@@ -92,6 +91,4 @@ class _HomeHeadState extends State<HomeHead>
       elevation: 0,
     ));
   }
-  @override
-  bool get wantKeepAlive => true;
 }
