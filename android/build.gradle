@@ -1,5 +1,10 @@
 buildscript {
     repositories {
+        // 本机需要安装 maven
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        mavenLocal()
+        mavenCentral()
         google()
         jcenter()
     }
@@ -11,6 +16,11 @@ buildscript {
 
 allprojects {
     repositories {
+        // 本机需要安装 maven
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        mavenLocal()
+        mavenCentral()
         google()
         jcenter()
     }
